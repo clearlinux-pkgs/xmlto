@@ -4,7 +4,7 @@
 #
 Name     : xmlto
 Version  : 0.0.28
-Release  : 12
+Release  : 13
 URL      : https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.28.tar.gz
 Source0  : https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.28.tar.gz
 Summary  : A tool for converting XML files to various formats.

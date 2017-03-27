@@ -4,9 +4,9 @@
 #
 Name     : xmlto
 Version  : 0.0.28
-Release  : 13
-URL      : https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.28.tar.gz
-Source0  : https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.28.tar.gz
+Release  : 14
+URL      : https://releases.pagure.org/xmlto/xmlto-0.0.28.tar.gz
+Source0  : https://releases.pagure.org/xmlto/xmlto-0.0.28.tar.gz
 Summary  : A tool for converting XML files to various formats.
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+
@@ -49,16 +49,20 @@ doc components for the xmlto package.
 %setup -q -n xmlto-0.0.28
 
 %build
+export LANG=C
+export SOURCE_DATE_EPOCH=1490637990
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
 %check
+export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
+export SOURCE_DATE_EPOCH=1490637990
 rm -rf %{buildroot}
 %make_install
 

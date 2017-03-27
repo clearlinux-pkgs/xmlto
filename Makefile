@@ -1,5 +1,5 @@
 PKG_NAME := xmlto
-URL := https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.28.tar.gz
-ARCHIVES :=
+URL := https://releases.pagure.org/xmlto/xmlto-0.0.28.tar.gz
+
 
 include ../common/Makefile.common

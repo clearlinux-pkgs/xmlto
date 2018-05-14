@@ -4,7 +4,7 @@
 #
 Name     : xmlto
 Version  : 0.0.28
-Release  : 19
+Release  : 20
 URL      : https://releases.pagure.org/xmlto/xmlto-0.0.28.tar.gz
 Source0  : https://releases.pagure.org/xmlto/xmlto-0.0.28.tar.gz
 Summary  : A tool for converting XML files to various formats.
@@ -53,7 +53,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1519918271
+export SOURCE_DATE_EPOCH=1526275234
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -65,7 +65,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1519918271
+export SOURCE_DATE_EPOCH=1526275234
 rm -rf %{buildroot}
 %make_install
 

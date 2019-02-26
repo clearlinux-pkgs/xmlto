@@ -4,15 +4,17 @@
 #
 Name     : xmlto
 Version  : 0.0.28
-Release  : 20
+Release  : 21
 URL      : https://releases.pagure.org/xmlto/xmlto-0.0.28.tar.gz
 Source0  : https://releases.pagure.org/xmlto/xmlto-0.0.28.tar.gz
 Summary  : A tool for converting XML files to various formats.
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+
-Requires: xmlto-bin
-Requires: xmlto-doc
-Requires: xmlto-data
+Requires: xmlto-bin = %{version}-%{release}
+Requires: xmlto-data = %{version}-%{release}
+Requires: xmlto-license = %{version}-%{release}
+Requires: xmlto-man = %{version}-%{release}
+Requires: util-linux-bin
 BuildRequires : flex
 BuildRequires : util-linux
 
@@ -23,7 +25,9 @@ stylesheets.
 %package bin
 Summary: bin components for the xmlto package.
 Group: Binaries
-Requires: xmlto-data
+Requires: xmlto-data = %{version}-%{release}
+Requires: xmlto-license = %{version}-%{release}
+Requires: xmlto-man = %{version}-%{release}
 
 %description bin
 bin components for the xmlto package.
@@ -37,12 +41,20 @@ Group: Data
 data components for the xmlto package.
 
 
-%package doc
-Summary: doc components for the xmlto package.
-Group: Documentation
+%package license
+Summary: license components for the xmlto package.
+Group: Default
 
-%description doc
-doc components for the xmlto package.
+%description license
+license components for the xmlto package.
+
+
+%package man
+Summary: man components for the xmlto package.
+Group: Default
+
+%description man
+man components for the xmlto package.
 
 
 %prep
@@ -53,7 +65,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1526275234
+export SOURCE_DATE_EPOCH=1551206599
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -65,8 +78,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1526275234
+export SOURCE_DATE_EPOCH=1551206599
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/xmlto
+cp COPYING %{buildroot}/usr/share/package-licenses/xmlto/COPYING
 %make_install
 
 %files
@@ -115,6 +130,11 @@ rm -rf %{buildroot}
 /usr/share/xmlto/format/xhtml1/txt
 /usr/share/xmlto/xmlto.mak
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man1/*
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/xmlto/COPYING
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/xmlif.1
+/usr/share/man/man1/xmlto.1
